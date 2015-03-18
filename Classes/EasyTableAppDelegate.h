@@ -8,15 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@class EasyTableViewController;
+@class FlipsideViewController;
 
 @interface EasyTableAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
-    EasyTableViewController *viewController;
+    FlipsideViewController *viewController;
 }
 
 @property (nonatomic) IBOutlet UIWindow *window;
-@property (nonatomic) IBOutlet EasyTableViewController *viewController;
+@property (nonatomic) IBOutlet FlipsideViewController *viewController;
 
 @end
 

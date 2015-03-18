@@ -7,7 +7,7 @@
 //
 
 #import "EasyTableAppDelegate.h"
-#import "EasyTableViewController.h"
+#import "FlipsideViewController.h"
 
 @implementation EasyTableAppDelegate
 

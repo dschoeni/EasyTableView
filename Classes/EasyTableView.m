@@ -440,5 +440,32 @@
     [self.tableView reloadData];
 }
 
+- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity: (CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset {
+    if (_snapAfterScroll) {
+        // Determine which table cell the scrolling will stop on.
+        NSInteger cellIndex = floor(targetContentOffset->y / _cellWidthOrHeight);
+        
+        // Middle Cell, not leftmost!
+        CGPoint middlePoint = CGPointMake(CGRectGetMidX(self.tableView.bounds), CGRectGetMidY(self.tableView.bounds));
+    
+        // Round to the next cell if the scrolling will stop over halfway to the next cell.
+        if ((targetContentOffset->y - (floor(targetContentOffset->y / _cellWidthOrHeight) * _cellWidthOrHeight)) > _cellWidthOrHeight) {
+            cellIndex++;
+        }
+    
+        // Adjust stopping point to exact beginning of cell.
+        targetContentOffset->y = cellIndex * _cellWidthOrHeight - (middlePoint.x / 2);
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    [self centerTable];
+}
+
+- (void)centerTable {
+    NSIndexPath *pathForCenterCell = [self.tableView indexPathForRowAtPoint:CGPointMake(CGRectGetMidX(self.tableView.bounds), CGRectGetMidY(self.tableView.bounds))];
+    [delegate easyTableView:self stoppedAtIndex:pathForCenterCell.row];
+}
+
 @end
 

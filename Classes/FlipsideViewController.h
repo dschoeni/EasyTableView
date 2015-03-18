@@ -8,22 +8,12 @@
 // Demonstrates the use of EasyTableView with images loaded from a remote server
 
 #import <UIKit/UIKit.h>
-#import "EasyTableView.h"
-#import "ImageStore.h"
+#import "PAImageScrollView.h"
 
 @class FlipsideViewController;
 
-@protocol FlipsideViewControllerDelegate
-- (void)flipsideViewControllerDidFinish:(FlipsideViewController *)controller;
-@end
+@interface FlipsideViewController : UIViewController
 
-@interface FlipsideViewController : UIViewController <EasyTableViewDelegate, ImageStoreDelegate>
-
-@property (nonatomic, unsafe_unretained) IBOutlet id<FlipsideViewControllerDelegate> delegate;
-@property (nonatomic) IBOutlet UILabel *errorLabel;
-@property (nonatomic) ImageStore *imageStore;
-@property (nonatomic) EasyTableView *easyTableView;
-
-- (IBAction)done:(id)sender;
+@property (nonatomic) PAImageScrollView *imageScrollView;
 
 @end
